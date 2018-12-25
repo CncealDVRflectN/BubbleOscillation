@@ -11,6 +11,20 @@ double calcAcousticWavePressure(double time)
     return -AMPLITUDE * PRESSURE_DEFAULT * sin(2.0 * M_PI * FREQUENCY * time);
 }
 
+double calcBoundaryPressure(const CalcUnit* value, double time)
+{
+    return calcGasPressure(value->derivR, time) - calcAcousticWavePressure(time) - 2 * SURFACE_TENSION_COEF / DENSITY -
+           4 * VISCOSITY * value->secondDerivR / value->derivR;
+}
+
+double calcOmega(const CalcUnit* value, double time)
+{
+    return 2 * SURFACE_TENSION_COEF * value->secondDerivR / (value->derivR * value->derivR) -
+           3 * SPECIFIC_HEAT_COEF * calcGasPressure(value->derivR, time) * value->secondDerivR / value->derivR +
+           4 * VISCOSITY * value->secondDerivR * value->secondDerivR / (value->derivR * value->derivR) +
+           AMPLITUDE * PRESSURE_DEFAULT * ANGULAR_FREQUENCY * cos(ANGULAR_FREQUENCY * time);
+}
+
 void calcEulerOneStep(void (*calcDerivatives)(double, const CalcUnit*, CalcUnit*),
                         double time, double step, const CalcUnit* value, CalcUnit* result)
 {

@@ -23,6 +23,8 @@ const static double VISCOSITY = 0.003;
 const static double SPECIFIC_HEAT_COEF = 1.4;
 const static double EPSILON = 1E-8;
 const static double AMPLITUDE = 1.28;
+const static double ANGULAR_FREQUENCY = 125663.706144;
+const static double SOUND_VELOCITY = 1500;
 
 const static double TIME_DEFAULT = 0.0;
 const static double TIME_MAX = 0.00025;
@@ -31,6 +33,10 @@ const static double STEP_DEFAULT = 1E-9;
 double calcGasPressure(double radius, double time);
 
 double calcAcousticWavePressure(double time);
+
+double calcBoundaryPressure(const CalcUnit* value, double time);
+
+double calcOmega(const CalcUnit* value, double time);
 
 void calcEulerOneStep(void (*calcDerivatives)(double, const CalcUnit*, CalcUnit*),
                         double time, double step, const CalcUnit* value, CalcUnit* result);
