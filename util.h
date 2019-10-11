@@ -1,6 +1,10 @@
 #ifndef BUBBLEOSCILLATION_UTIL_H
 #define BUBBLEOSCILLATION_UTIL_H
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
+
 typedef struct
 {
     double derivR;
@@ -34,16 +38,16 @@ double calcGasPressure(double radius, double time);
 
 double calcAcousticWavePressure(double time);
 
-double calcBoundaryPressure(const CalcUnit* value, double time);
+double calcBoundaryPressure(const CalcUnit& value, double time);
 
-double calcOmega(const CalcUnit* value, double time);
+double calcOmega(const CalcUnit& value, double time);
 
-void calcEulerOneStep(void (*calcDerivatives)(double, const CalcUnit*, CalcUnit*),
-                        double time, double step, const CalcUnit* value, CalcUnit* result);
+void calcEulerOneStep(void (*calcDerivatives)(double, const CalcUnit&, CalcUnit&),
+                        double time, double step, const CalcUnit& value, CalcUnit& result);
 
-void calcRungeKuttaOneStep(void (*calcDerivatives)(double, const CalcUnit*, CalcUnit*),
-                            double time, double step, const CalcUnit* value, CalcUnit *result);
+void calcRungeKuttaOneStep(void (*calcDerivatives)(double, const CalcUnit&, CalcUnit&),
+                            double time, double step, const CalcUnit& value, CalcUnit& result);
 
-double calcError(const CalcUnit* stepValue, const CalcUnit* doubleStepValue);
+double calcError(const CalcUnit& stepValue, const CalcUnit& doubleStepValue);
 
 #endif //BUBBLEOSCILLATION_UTIL_H

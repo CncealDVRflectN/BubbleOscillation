@@ -1,0 +1,14 @@
+.git
+
+.idea/
+.vs/BubbleOscillation
+.vs/ProjectSettings.json
+.vs/*.sqlite
+.vs/VSWorkspaceState.json
+*.ipch
+*.db
+*.opendb
+*.suo
+
+cmake-build-debug/
+out/
